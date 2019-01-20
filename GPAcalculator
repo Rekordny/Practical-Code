@@ -1,0 +1,147 @@
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.geometry.Pos;
+import javafx.event.ActionEvent;
+import java.text.DecimalFormat;
+
+public class GPAcalculator extends Application{
+	private Label enterLetter;
+	private TextField letterGrade;
+	private Label enterHour;
+	private TextField creditHours;
+	private Text firstLine;
+	private Text secondLine;
+	private Button add;
+	private Button clear;
+	double pt = 0;
+	double ptt = 0;
+	int hrst = 0;
+	double gpa;
+	
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+	public void start(Stage primaryStage){
+		primaryStage.setTitle("GPA calculator"); 
+		
+		enterLetter = new Label("Course Letter Grade:");
+		letterGrade = new TextField();
+		letterGrade.setPrefWidth(50);
+		letterGrade.setOnAction(this::events);
+		
+		enterHour = new Label("Course credit hours:");
+		creditHours = new TextField();
+		creditHours.setPrefWidth(50);
+		creditHours.setOnAction(this::events);
+		
+		firstLine = new Text("Welcome to my GPA calculator!");
+		secondLine = new Text("Enter your 1st grade & credit hrs.");
+		
+		add = new Button("Add to GPA");
+		add.setOnAction(this::events);
+		clear = new Button("Clear GPA");
+		clear.setOnAction(this::events);
+		
+		FlowPane pane = new FlowPane(enterLetter, letterGrade, enterHour, creditHours, add, clear, firstLine, secondLine);
+		pane.setHgap(30);
+		pane.setVgap(30);
+		pane.setAlignment(Pos.CENTER);
+		Scene myScene = new Scene(pane,270,300);
+		primaryStage.setScene(myScene);
+		primaryStage.show();
+	}
+	
+	public void events(ActionEvent event) {
+		DecimalFormat form = new DecimalFormat("0.0");
+		
+		if (event.getSource()==add) {
+			int hrs=Integer.parseInt(creditHours.getText());
+			if (letterGrade.getText().equals("A+")) {
+				pt=4.3*hrs;
+				ptt+=pt;
+				hrst+=hrs;
+
+				firstLine.setText("Points for this course: "+form.format(pt));
+			}else if (letterGrade.getText().equals("A")) {
+				pt=4.0*hrs;
+				ptt+=pt;
+				hrst+=hrs;
+	
+				firstLine.setText("Points for this course: "+form.format(pt));
+			}else if (letterGrade.getText().equals("A-")) {
+				pt=3.7*hrs;
+				ptt+=pt;
+				hrst+=hrs;
+	
+				firstLine.setText("Points for this course: "+form.format(pt));
+			}else if (letterGrade.getText().equals("B+")) {
+				pt=3.3*hrs;
+				ptt+=pt;
+				hrst+=hrs;
+	
+				firstLine.setText("Points for this course: "+form.format(pt));
+			}else if (letterGrade.getText().equals("B")) {
+				pt=3.0*hrs;
+				ptt+=pt;
+				hrst+=hrs;
+	
+				firstLine.setText("Points for this course: "+form.format(pt));
+			}else if (letterGrade.getText().equals("B-")) {
+				pt=2.7*hrs;
+				ptt+=pt;
+				hrst+=hrs;
+	
+				firstLine.setText("Points for this course: "+form.format(pt));
+			}else if (letterGrade.getText().equals("C+")) {
+				pt=2.3*hrs;
+				ptt+=pt;
+				hrst+=hrs;
+	
+				firstLine.setText("Points for this course: "+form.format(pt));
+			}else if (letterGrade.getText().equals("C")) {
+				pt=2.0*hrs;
+				ptt+=pt;
+				hrst+=hrs;
+	
+				firstLine.setText("Points for this course: "+form.format(pt));
+			}else if (letterGrade.getText().equals("D")) {
+				pt=1.0*hrs;
+				ptt+=pt;
+				hrst+=hrs;
+	
+				firstLine.setText("Points for this course: "+form.format(pt));
+			}else if (letterGrade.getText().equals("F")||letterGrade.getText().equals("WF")) {
+				pt=0.0*hrs;
+				ptt+=pt;
+				hrst+=hrs;
+	
+				firstLine.setText("Points for this course: "+form.format(pt));
+			}else {
+				firstLine.setText("Invalid grade - GPA not changed.");
+			}
+			gpa = ptt/hrst;
+			secondLine.setText("Your cumulative GPA is: " + form.format(gpa));
+			
+			
+		}
+		if (event.getSource()==clear) {
+			hrst=0;
+			gpa=0;
+			pt=0;
+			hrst=0;
+			ptt=0;
+			firstLine.setText("Welcome to my GPA calculator!");
+			secondLine.setText("Enter your 1st grade & credit hrs.");
+			creditHours.setText(null);
+			letterGrade.setText(null);
+		}
+	}
+	
+}
