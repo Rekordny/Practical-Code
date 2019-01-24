@@ -1,0 +1,24 @@
+public class BubbleSort {
+	public static void main(String[] args) {
+		int[] storage = {4,32,2,56,32,33,678,52,32,657,90,44,21,3,67,8,53,68,54};
+		System.out.println("Before bubble sort: ");
+		for(int num:storage) {
+			System.out.print(num +" ");
+		}
+		System.out.println();
+		int temp;
+		for (int j = 0; j < storage.length; j++) {
+			for (int i = j; i < storage.length; i++) {
+				if (storage[i]<storage[j]) {
+					temp = storage[i];
+					storage[i] = storage[j];
+					storage[j] = temp;
+				}
+			}
+		}
+		System.out.println("After bubble sort: ");
+			for(int num:storage) {
+				System.out.print(num+" ");
+			}
+	}
+}
