@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class GenerateInverse {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Give a single word each time: ");
+		while(scanner.hasNext()) {
+			String mem = scanner.nextLine();
+			char[] arr = mem.toCharArray();
+			char[] result = new char[arr.length];
+			int j = 0;
+			for (int i = result.length-1; i >= 0; i--) {
+				result[j] = arr[i];
+				j++;
+			}
+			System.out.println("Without using StringBuffer go inverse: ");
+			for (char s:result) {
+				System.out.print(s);
+			}
+		}
+	}
+}
